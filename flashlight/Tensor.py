@@ -288,16 +288,35 @@ class Tensor:
         return out
 
     def __sub__(self, other):
-        """Subtraction: Forward: z = x - y."""
-        return self + (-other)
+        other = other if isinstance(other, Tensor) else Tensor(other, requires_grad=False)
+        out_data = self.data - other.data
+        
+        if not Config.enable_backprop:
+            return Tensor(out_data, requires_grad=False)
+        
+        requires_grad = (self.requires_grad or other.requires_grad)
+        out = Tensor(out_data, requires_grad=requires_grad, _children=(self, other), _op='-',
+                    _label=f'({self._label} - {other._label})')
+        
+        def _backward():
+            if out.grad is None:
+                return
+            grad = out.grad.data
+            if self.requires_grad:
+                self._accumulate_grad(self._unbroadcast(grad, self.data.shape))
+            if other.requires_grad:
+                other._accumulate_grad(other._unbroadcast(-grad, other.data.shape))
+        
+        out._backward = _backward
+        return out
 
     def __rsub__(self, other):
         """Right subtraction: Forward: z = y - x."""
-        return other + (-self)
+        return other + (self * Tensor(np.ones(self.data.shape) * -1, requires_grad=self.requires_grad, _label="minusones"))
 
     def __neg__(self):
         """Negation: Forward: z = -x."""
-        return self * -1
+        return self * Tensor(np.ones(self.data.shape) * -1, requires_grad=self.requires_grad, _label="minusones")
 
     def __radd__(self, other):
         """Right addition."""
