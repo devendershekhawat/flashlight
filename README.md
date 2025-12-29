@@ -1,8 +1,12 @@
 # Flashlight 🔦
 
-**Flashlight** is a lightweight, educational deep learning framework built from scratch in Python and NumPy.
+![](https://media1.tenor.com/m/gYXpiWkUEw4AAAAd/its-not-that-serious-ella-payne.gif)
 
-It serves as a "drop-in" replacement for the basic functionalities of PyTorch, designed to shed light on the internal mechanics of tensors, autograd, and neural network training.
+**Flashlight** is a super lightweight, library I created for my own learning and it will not help you at all in building Complex Neural nets.
+
+However, if you are creating a simple MLP using Linear + Batchnorm layers and basic non linearlities, you can use this for your mini learning projects.
+
+P.S - I wasted more than 50 sheets of paper to derive the derivatives of log, mean, tanh etc myself for this.
 
 ## Motivation
 
