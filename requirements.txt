@@ -1,0 +1,11 @@
+# Core dependencies
+numpy>=1.20.0
+
+# Optional dependencies for visualization
+# For graphviz-based visualization (requires system Graphviz installation)
+graphviz>=0.20.0
+
+# For matplotlib-based visualization (pure Python, no system executables needed)
+matplotlib>=3.5.0
+networkx>=2.6.0
+
