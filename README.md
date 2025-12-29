@@ -32,7 +32,7 @@ While minimalistic, Flashlight handles the heavy lifting required to train stand
 - **Slicing & Indexing:** Support for advanced indexing and masking with gradient tracking.
 - **PyTorch-like API:** Familiar syntax (`x.backward()`, `x.grad`, `x.data`) makes it easy to read for anyone familiar with Torch.
 
-#### Here's a computational graph created by the flashlight autograd engines
+#### Here's a computational graph created by the flashlight autograd engine
 
 ![](./output.svg)
 
