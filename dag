@@ -1,0 +1,333 @@
+digraph {
+	rankdir=LR
+	node [fontsize=10]
+	tensor_4390502480 [label="(30,)" fillcolor=lightyellow fontsize=10 shape=box style=filled]
+	tensor_4738617424 [label="()" fillcolor=lightyellow fontsize=10 shape=box style=filled]
+	tensor_4394629200 [label="(30,200)" fillcolor=lightyellow fontsize=10 shape=box style=filled]
+	tensor_4738627792 [label="log(softmax(((tanh(((( * ((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ ) + (mean((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ )) * ))) / std((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ ))) + )) @ ) + ))[(Flashlight Tensor(data=[0.0000e+00 1.0000e+00 2.0000e+00 ... 5.0750e+04 5.0751e+04 5.0752e+04], shape=(50753,), requires_grad=False), Flashlight Tensor(data=[21.  4. 13. ... 21.  4.  0.], shape=(50753,), requires_grad=False))])\n(50753,)" fillcolor=lightyellow fontsize=10 shape=box style=filled]
+	tensor_4738615504 [label="std((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ ))\n(1,200)" fillcolor=lightyellow fontsize=10 shape=box style=filled]
+	tensor_4738623696 [label="()" fillcolor=lightyellow fontsize=10 shape=box style=filled]
+	tensor_4390502720 [label="(200,30)" fillcolor=lightyellow fontsize=10 shape=box style=filled]
+	tensor_4738613584 [label="(( * ((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ ) + (mean((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ )) * ))) / std((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ )))\n(50753,200)" fillcolor=lightyellow fontsize=10 shape=box style=filled]
+	tensor_4738615632 [label="((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ ) + (mean((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ )) * ))\n(50753,200)" fillcolor=lightyellow fontsize=10 shape=box style=filled]
+	tensor_4709454288 [label="(1,200)" fillcolor=lightyellow fontsize=10 shape=box style=filled]
+	tensor_4738624080 [label="view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)])\n(50753,30)" fillcolor=lightyellow fontsize=10 shape=box style=filled]
+	tensor_4761438800 [label="[Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]\n(50753,3,10)" fillcolor=lightyellow fontsize=10 shape=box style=filled]
+	tensor_4738626256 [label="softmax(((tanh(((( * ((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ ) + (mean((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ )) * ))) / std((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ ))) + )) @ ) + ))[(Flashlight Tensor(data=[0.0000e+00 1.0000e+00 2.0000e+00 ... 5.0750e+04 5.0751e+04 5.0752e+04], shape=(50753,), requires_grad=False), Flashlight Tensor(data=[21.  4. 13. ... 21.  4.  0.], shape=(50753,), requires_grad=False))]\n(50753,)" fillcolor=lightyellow fontsize=10 shape=box style=filled]
+	tensor_4738620112 [label="mean(log(softmax(((tanh(((( * ((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ ) + (mean((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ )) * ))) / std((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ ))) + )) @ ) + ))[(Flashlight Tensor(data=[0.0000e+00 1.0000e+00 2.0000e+00 ... 5.0750e+04 5.0751e+04 5.0752e+04], shape=(50753,), requires_grad=False), Flashlight Tensor(data=[21.  4. 13. ... 21.  4.  0.], shape=(50753,), requires_grad=False))]))\n()" fillcolor=lightyellow fontsize=10 shape=box style=filled]
+	tensor_4738613968 [label="((( * ((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ ) + (mean((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ )) * ))) / std((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ ))) + )\n(50753,200)" fillcolor=lightyellow fontsize=10 shape=box style=filled]
+	tensor_4390048592 [label="(30,10)" fillcolor=lightyellow fontsize=10 shape=box style=filled]
+	tensor_4738622416 [label="(mean((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ )) * )\n(1,200)" fillcolor=lightyellow fontsize=10 shape=box style=filled]
+	tensor_4738614224 [label="tanh(((( * ((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ ) + (mean((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ )) * ))) / std((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ ))) + ))\n(50753,200)" fillcolor=lightyellow fontsize=10 shape=box style=filled]
+	tensor_4738624464 [label="(view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ )\n(50753,200)" fillcolor=lightyellow fontsize=10 shape=box style=filled]
+	tensor_4738616528 [label="(tanh(((( * ((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ ) + (mean((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ )) * ))) / std((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ ))) + )) @ )\n(50753,30)" fillcolor=lightyellow fontsize=10 shape=box style=filled]
+	tensor_4709455408 [label="(1,200)" fillcolor=lightyellow fontsize=10 shape=box style=filled]
+	tensor_4738618960 [label="softmax(((tanh(((( * ((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ ) + (mean((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ )) * ))) / std((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ ))) + )) @ ) + ))\n(50753,30)" fillcolor=lightyellow fontsize=10 shape=box style=filled]
+	tensor_4738619088 [label="( * ((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ ) + (mean((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ )) * )))\n(50753,200)" fillcolor=lightyellow fontsize=10 shape=box style=filled]
+	tensor_4738623312 [label="(mean(log(softmax(((tanh(((( * ((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ ) + (mean((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ )) * ))) / std((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ ))) + )) @ ) + ))[(Flashlight Tensor(data=[0.0000e+00 1.0000e+00 2.0000e+00 ... 5.0750e+04 5.0751e+04 5.0752e+04], shape=(50753,), requires_grad=False), Flashlight Tensor(data=[21.  4. 13. ... 21.  4.  0.], shape=(50753,), requires_grad=False))])) * )\n()" fillcolor=lightyellow fontsize=10 shape=box style=filled]
+	tensor_4738627408 [label="((tanh(((( * ((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ ) + (mean((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ )) * ))) / std((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ ))) + )) @ ) + )\n(50753,30)" fillcolor=lightyellow fontsize=10 shape=box style=filled]
+	tensor_4738617168 [label="mean((view(50753, 30)([Flashlight Tensor(data=[[ 0.  0.  0.]
+ [ 0.  0. 21.]
+ [ 0. 21.  4.]
+ ...
+ [ 8. 17.  7.]
+ [17.  7. 21.]
+ [ 7. 21.  4.]], shape=(50753, 3), requires_grad=False)]) @ ))\n(1,200)" fillcolor=lightyellow fontsize=10 shape=box style=filled]
+	op_4738623312 [label="*" fillcolor=lightblue fontsize=10 shape=circle style=filled]
+	op_4738620112 [label=mean fillcolor=lightblue fontsize=10 shape=circle style=filled]
+	op_4738627792 [label=log fillcolor=lightblue fontsize=10 shape=circle style=filled]
+	op_4738626256 [label=slice fillcolor=lightblue fontsize=10 shape=circle style=filled]
+	op_4738618960 [label=softmax fillcolor=lightblue fontsize=10 shape=circle style=filled]
+	op_4738627408 [label="+" fillcolor=lightblue fontsize=10 shape=circle style=filled]
+	op_4738616528 [label="@" fillcolor=lightblue fontsize=10 shape=circle style=filled]
+	op_4738614224 [label=tanh fillcolor=lightblue fontsize=10 shape=circle style=filled]
+	op_4738613968 [label="+" fillcolor=lightblue fontsize=10 shape=circle style=filled]
+	op_4738613584 [label="/" fillcolor=lightblue fontsize=10 shape=circle style=filled]
+	op_4738619088 [label="*" fillcolor=lightblue fontsize=10 shape=circle style=filled]
+	op_4738615632 [label="+" fillcolor=lightblue fontsize=10 shape=circle style=filled]
+	op_4738622416 [label="*" fillcolor=lightblue fontsize=10 shape=circle style=filled]
+	op_4738617168 [label=mean fillcolor=lightblue fontsize=10 shape=circle style=filled]
+	op_4738624464 [label="@" fillcolor=lightblue fontsize=10 shape=circle style=filled]
+	op_4738624080 [label=view fillcolor=lightblue fontsize=10 shape=circle style=filled]
+	op_4761438800 [label=slice fillcolor=lightblue fontsize=10 shape=circle style=filled]
+	op_4738615504 [label=std fillcolor=lightblue fontsize=10 shape=circle style=filled]
+	tensor_4390502480 -> op_4738627408
+	tensor_4390502720 -> op_4738616528
+	tensor_4709454288 -> op_4738613968
+	tensor_4709455408 -> op_4738619088
+	tensor_4738617424 -> op_4738622416
+	tensor_4390048592 -> op_4761438800
+	op_4761438800 -> tensor_4761438800
+	tensor_4761438800 -> op_4738624080
+	op_4738624080 -> tensor_4738624080
+	tensor_4738624080 -> op_4738624464
+	tensor_4394629200 -> op_4738624464
+	op_4738624464 -> tensor_4738624464
+	tensor_4738624464 -> op_4738617168
+	op_4738617168 -> tensor_4738617168
+	tensor_4738617168 -> op_4738622416
+	op_4738622416 -> tensor_4738622416
+	tensor_4738622416 -> op_4738615632
+	tensor_4738624464 -> op_4738615632
+	op_4738615632 -> tensor_4738615632
+	tensor_4738615632 -> op_4738619088
+	op_4738619088 -> tensor_4738619088
+	tensor_4738619088 -> op_4738613584
+	tensor_4738624464 -> op_4738615504
+	op_4738615504 -> tensor_4738615504
+	tensor_4738615504 -> op_4738613584
+	op_4738613584 -> tensor_4738613584
+	tensor_4738613584 -> op_4738613968
+	op_4738613968 -> tensor_4738613968
+	tensor_4738613968 -> op_4738614224
+	op_4738614224 -> tensor_4738614224
+	tensor_4738614224 -> op_4738616528
+	op_4738616528 -> tensor_4738616528
+	tensor_4738616528 -> op_4738627408
+	op_4738627408 -> tensor_4738627408
+	tensor_4738627408 -> op_4738618960
+	op_4738618960 -> tensor_4738618960
+	tensor_4738618960 -> op_4738626256
+	op_4738626256 -> tensor_4738626256
+	tensor_4738626256 -> op_4738627792
+	op_4738627792 -> tensor_4738627792
+	tensor_4738627792 -> op_4738620112
+	op_4738620112 -> tensor_4738620112
+	tensor_4738620112 -> op_4738623312
+	tensor_4738623696 -> op_4738623312
+	op_4738623312 -> tensor_4738623312
+}
