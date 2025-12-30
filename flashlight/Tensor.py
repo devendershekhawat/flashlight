@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import numpy as np
 from .Config import Config
 
@@ -56,7 +58,7 @@ class Tensor:
         return self.data.shape
 
     def __repr__(self):
-        return f"Flashlight Tensor(data={self.data}, shape={self.data.shape}, requires_grad={self.requires_grad})"
+        return f"Flashlight Tensor(shape={self.data.shape}, requires_grad={self.requires_grad})"
 
     def numpy(self) -> np.ndarray:
         """Returns the underlying numpy array."""
@@ -70,16 +72,45 @@ class Tensor:
         """Returns the total number of elements."""
         return int(self.data.size)
 
-    def backward(self):
+    def detach(self):
         """
-        Automated Backpropagation using the Chain Rule.
+        Returns a new tensor detached from the computational graph.
         
-        Logic:
-        1. Topological Sort: Order nodes so we process gradients from output to inputs.
-        2. Set Base Gradient: The gradient of the loss with respect to itself is 1.0.
-        3. Iterate & Apply Chain Rule: Run the stored _backward() functions in reverse.
+        This creates a copy of the tensor's data without any references to parent
+        tensors (_children), which allows the original computational graph to be
+        garbage collected. Essential for preventing memory leaks during long training
+        loops where thousands of computational graphs accumulate.
         """
-        # --- 1. Topological Sort ---
+        return Tensor(self.data.copy(), requires_grad=False)
+    
+    def _clear_graph(self):
+        """
+        Recursively clears the computational graph starting from this tensor.
+        
+        This breaks all _children references and clears _backward functions,
+        allowing Python's garbage collector to free memory. Used internally
+        to prevent memory leaks during training.
+        """
+        visited = set()
+        stack = [self]
+        
+        while stack:
+            node = stack.pop()
+            if node in visited:
+                continue
+            visited.add(node)
+            
+            # Clear this node's graph references
+            children = list(node._children)  # Copy before clearing
+            node._children = set()
+            node._backward = lambda: None
+            
+            # Recursively clear children
+            for child in children:
+                if child not in visited:
+                    stack.append(child)
+
+    def backward(self, gradient: Tensor | None = None):
         topo = []
         visited = set()
         
@@ -91,14 +122,12 @@ class Tensor:
                 topo.append(v)
         
         build_topo(self)
-        
-        # --- 2. Set Base Gradient ---
+
         self.grad = Tensor(np.ones_like(self.data, dtype=np.float32), requires_grad=False)
         
-        # --- 3. Reverse Iteration ---
-        for node in reversed(topo):
-            if node._backward:
-                node._backward()
+        for i, v in enumerate(reversed(topo)):
+            if v._backward:
+                v._backward()
 
     # -------------------------------------------------------------------------
     # INDEXING
@@ -312,11 +341,27 @@ class Tensor:
 
     def __rsub__(self, other):
         """Right subtraction: Forward: z = y - x."""
-        return other + (self * Tensor(np.ones(self.data.shape) * -1, requires_grad=self.requires_grad, _label="minusones"))
+        return other + (-self)
 
     def __neg__(self):
-        """Negation: Forward: z = -x."""
-        return self * Tensor(np.ones(self.data.shape) * -1, requires_grad=self.requires_grad, _label="minusones")
+        """Negation: Forward: z = -x, Backward: dL/dx = -dL/dz."""
+        out_data = -self.data
+        
+        if not Config.enable_backprop or not self.requires_grad:
+            return Tensor(out_data, requires_grad=False)
+        
+        out = Tensor(out_data, requires_grad=True, _children=(self,), _op='neg',
+                    _label=f'-{self._label}')
+        
+        def _backward():
+            if out.grad is None:
+                return
+            grad = out.grad.data
+            # Gradient of -x is -1 * grad
+            self._accumulate_grad(-grad.astype(np.float32))
+        
+        out._backward = _backward
+        return out
 
     def __radd__(self, other):
         """Right addition."""
@@ -385,7 +430,13 @@ class Tensor:
             if out.grad is None:
                 return
             grad = out.grad.data
-            if not keepdim and dim is not None:
+            
+            # Handle scalar gradient (when summing over all dimensions)
+            if grad.ndim == 0:
+                # Scalar gradient - just broadcast to original shape
+                grad = np.broadcast_to(grad, self.data.shape)
+            elif not keepdim and dim is not None:
+                # Expand dimensions that were reduced
                 for d in sorted(dim, reverse=True):
                     grad = np.expand_dims(grad, axis=d)
             
@@ -420,11 +471,8 @@ class Tensor:
             if out.grad is None:
                 return
             grad = out.grad.data
-            if not keepdim and dim is not None:
-                for d in sorted(dim, reverse=True):
-                    grad = np.expand_dims(grad, axis=d)
             
-            # Compute mean for centering
+            # Compute mean for centering (needed for gradient computation)
             mean_val = self.data.mean(axis=dim, keepdims=True)
             std_val = self.data.std(axis=dim, keepdims=True)
             
@@ -434,9 +482,19 @@ class Tensor:
             # Gradient of std
             n_elements = np.prod([self.data.shape[d] for d in dim])
             diff = self.data - mean_val
-            grad_input = (diff / (safe_std * n_elements)) * grad
             
-            # Broadcast back
+            # Handle scalar gradient (when summing over all dimensions)
+            if grad.ndim == 0:
+                # Scalar gradient - multiply directly
+                grad_input = (diff / (safe_std * n_elements)) * grad
+            else:
+                # Expand grad dimensions if needed
+                if not keepdim and dim is not None:
+                    for d in sorted(dim, reverse=True):
+                        grad = np.expand_dims(grad, axis=d)
+                grad_input = (diff / (safe_std * n_elements)) * grad
+            
+            # Broadcast back to original shape
             grad_input = np.broadcast_to(grad_input, self.data.shape)
             
             self._accumulate_grad(grad_input.astype(np.float32))
@@ -463,10 +521,19 @@ class Tensor:
             if out.grad is None:
                 return
             grad = out.grad.data
-            if not keepdim and dim is not None:
-                for d in sorted(dim, reverse=True):
-                    grad = np.expand_dims(grad, axis=d)
             
+            # Handle scalar gradient (when summing over all dimensions)
+            if grad.ndim == 0:
+                # Scalar gradient - just broadcast to original shape
+                grad = np.broadcast_to(grad, self.data.shape)
+            elif not keepdim and dim is not None:
+                # Expand dimensions that were reduced
+                for d in sorted(dim, reverse=True):
+                    # Only expand if the dimension exists in the current grad shape
+                    if d < len(self.data.shape):
+                        grad = np.expand_dims(grad, axis=d)
+            
+            # Ensure gradient matches input shape
             grad = np.broadcast_to(grad, self.data.shape)
             
             self._accumulate_grad(grad.astype(np.float32))
