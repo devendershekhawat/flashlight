@@ -27,11 +27,11 @@ While minimalistic, Flashlight handles the heavy lifting required to train stand
 - **Autograd Engine:** A fully functional reverse-mode automatic differentiation engine.
 - **Tensor Operations:** Support for matrix multiplication (`@`), addition, subtraction, division, and negation.
 - **Broadcasting:** Automatically handles shape mismatches during arithmetic operations (and correctly reduces gradients during the backward pass).
-- **Activation Functions:** Built-in support for `tanh`, `softmax`, `log`, and `exp`.
+- **Activation Functions:** Built-in support for `tanh`, `relu`, `softmax`, `log`, and `exp`.
 - **Statistical Ops:** Implementations of `mean`, `std`, and `sum` with dimension specifications (crucial for Batch Normalization).
 - **Slicing & Indexing:** Support for advanced indexing and masking with gradient tracking.
 - **PyTorch-like API:** Familiar syntax (`x.backward()`, `x.grad`, `x.data`) makes it easy to read for anyone familiar with Torch.
-- **Neural Network Layers:** Pre-built layers including Linear, BatchNorm1d, Tanh, and a NeuralNet container for building models.
+- **Neural Network Layers:** Pre-built layers including Linear, BatchNorm1d, Tanh, Relu, and a NeuralNet container for building models.
 
 #### Here's a computational graph created by the flashlight autograd engine
 
@@ -39,7 +39,9 @@ While minimalistic, Flashlight handles the heavy lifting required to train stand
 
 Awesome, isn't it?
 
-## The "Makemore" Implementation
+## Benchmarks
+
+### The "Makemore" Implementation
 
 The core benchmark for this library is **`lab.ipynb`**.
 
@@ -53,6 +55,16 @@ It successfully trains on `names.txt` using:
 - Tanh Non-linearity
 - Cross-Entropy Loss
 
+### Make Circles Classification
+
+Another benchmark is **`make_circles.ipynb`**, which demonstrates binary classification on the scikit-learn make_circles dataset.
+
+The model uses Linear and ReLU layers to learn a non-linear decision boundary for separating two concentric circles. This showcases the library's ability to handle non-linear classification tasks.
+
+![](./assets/circles.png)
+
+The model achieves high accuracy on this task, demonstrating that Flashlight can effectively train neural networks for real classification problems.
+
 ## Project Structure
 
 - `flashlight/Tensor.py`: The heart of the library. Contains the `Tensor` class, the DAG (Directed Acyclic Graph) construction, and the `.backward()` logic.
@@ -62,8 +74,10 @@ It successfully trains on `names.txt` using:
   - `Linear.py`: Fully connected layer with optional bias
   - `BatchNorm1d.py`: Batch normalization for 1D inputs
   - `Tanh.py`: Tanh activation layer
+  - `Relu.py`: ReLU activation layer
   - `NeuralNet.py`: Container class for building and training neural networks
 - `lab.ipynb`: The training playground. A character-level language model trained using Flashlight.
+- `make_circles.ipynb`: Binary classification benchmark using scikit-learn's make_circles dataset.
 
 ## Usage Example
 
@@ -173,7 +187,7 @@ This generates plots in `benchmark_results/` showing performance across differen
 
 - Tensor operation accuracy tests (comparing against numpy)
 - Gradient correctness verification (including numerical gradient checks)
-- Neural layer tests (Linear, BatchNorm1d, Tanh)
+- Neural layer tests (Linear, BatchNorm1d, Tanh, Relu)
 - Additional edge cases and numerical stability tests
 
 ## Acknowledgements
