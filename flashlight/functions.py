@@ -4,6 +4,9 @@ from .creators import arange
 def tanh(x: 'Tensor') -> 'Tensor':
   return x.tanh()
 
+def relu(x: 'Tensor') -> 'Tensor':
+  return x.relu()
+
 def log(x: 'Tensor') -> 'Tensor':
   return x.log()
 

@@ -72,6 +72,23 @@ class TestGradients:
         expected_grad = 1.0 - (c.data ** 2)
         assert_grad_close(a, expected_grad)
     
+    def test_relu_gradient(self):
+        """Test gradient of ReLU."""
+        a = Tensor([-2.0, -1.0, 0.0, 1.0, 2.0], requires_grad=True)
+        c = a.relu()
+        c.backward()
+        
+        # ReLU'(x) = 1 if x > 0, else 0
+        expected_grad = (a.data > 0).astype(np.float32)
+        assert_grad_close(a, expected_grad)
+        
+        # Test edge case at zero
+        a = Tensor([-1.0, 0.0, 1.0], requires_grad=True)
+        c = a.relu()
+        c.backward()
+        expected_grad = np.array([0.0, 0.0, 1.0], dtype=np.float32)
+        assert_grad_close(a, expected_grad)
+    
     def test_exp_gradient(self):
         """Test gradient of exp."""
         a = Tensor([0.0, 1.0, 2.0], requires_grad=True)

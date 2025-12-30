@@ -638,6 +638,20 @@ class Tensor:
         out._backward = _backward
         return out
 
+    def relu(self):
+        """Rectified Linear Unit activation."""
+        out_data = np.maximum(0, self.data)
+        out =  Tensor(out_data, requires_grad=self.requires_grad)
+        def _backward():
+            if out.grad is None:
+                return
+            grad = out.grad.data
+            grad_input = grad * (self.data > 0)
+            self._accumulate_grad(grad_input.astype(np.float32))
+        
+        out._backward = _backward
+        return out
+
     # -------------------------------------------------------------------------
     # SHAPE OPERATIONS
     # -------------------------------------------------------------------------

@@ -3,7 +3,7 @@ import numpy as np
 import pytest
 from ..Tensor import Tensor
 from ..creators import randn, ones, zeros
-from ..neural import Linear, BatchNorm1d, Tanh
+from ..neural import Linear, BatchNorm1d, Tanh, Relu
 from ..Config import Config
 from .test_utils import assert_tensor_close, assert_grad_close
 
@@ -160,6 +160,41 @@ class TestTanhLayer:
         params = tanh.parameters()
         assert len(params) == 0
 
+class TestReluLayer:
+    """Test ReLU activation layer."""
+    
+    def setup_method(self):
+        """Setup before each test."""
+        Config.enable_backprop = True
+    
+    def test_relu_forward(self):
+        """Test forward pass of ReLU layer."""
+        relu = Relu()
+        x = Tensor([[-2.0, -1.0, 0.0, 1.0, 2.0], [3.0, -3.0, 0.5, -0.5, 0.0]])
+        out = relu(x)
+        
+        expected = np.maximum(0, x.data)
+        assert_tensor_close(out, expected)
+    
+    def test_relu_gradient(self):
+        """Test gradient flow through ReLU."""
+        relu = Relu()
+        x = Tensor([[-2.0, -1.0, 0.0, 1.0, 2.0]], requires_grad=True)
+        out = relu(x)
+        loss = out.sum()
+        loss.backward()
+        
+        assert x.grad is not None
+        # ReLU'(x) = 1 if x > 0, else 0
+        expected_grad = (x.data > 0).astype(np.float32)
+        assert_grad_close(x, expected_grad)
+    
+    def test_relu_parameters(self):
+        """Test parameter retrieval (should be empty)."""
+        relu = Relu()
+        params = relu.parameters()
+        assert len(params) == 0
+
 class TestNeuralNetIntegration:
     """Test integration of multiple layers."""
     
@@ -214,6 +249,37 @@ class TestNeuralNetIntegration:
         loss = net.forward(x, y)
         
         assert loss.shape == ()
+        
+        # Test gradient flow
+        loss.backward()
+        params = net.parameters()
+        for p in params:
+            if p.grad is not None:
+                assert p.grad.data is not None
+    
+    def test_relu_integration(self):
+        """Test ReLU integration in neural network."""
+        from ..neural import NeuralNet
+        
+        def calculate_output(x):
+            return x
+        
+        def calculate_loss(output, target):
+            diff = output - target
+            return (diff * diff).mean()
+        
+        net = NeuralNet(calculate_output=calculate_output, calculate_loss=calculate_loss)
+        net.add_layer(Linear(3, 4))
+        net.add_layer(Relu())
+        net.add_layer(Linear(4, 2))
+        
+        x = Tensor([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]])
+        y = Tensor([[0.0, 1.0], [1.0, 0.0]])
+        
+        loss = net.forward(x, y)
+        
+        assert loss.shape == ()
+        assert loss.item() > 0
         
         # Test gradient flow
         loss.backward()

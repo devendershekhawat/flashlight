@@ -3,7 +3,7 @@ import numpy as np
 import pytest
 from ..Tensor import Tensor
 from ..creators import randn, ones, zeros, arange
-from ..functions import nll_loss, softmax
+from ..functions import nll_loss, softmax, relu
 from ..Config import Config
 from .test_utils import assert_tensor_close
 
@@ -148,6 +148,32 @@ class TestActivationFunctions:
         # Tanh output should be in [-1, 1]
         assert np.all(result.data >= -1.0)
         assert np.all(result.data <= 1.0)
+    
+    def test_relu_properties(self):
+        """Test ReLU properties."""
+        a = Tensor([-5.0, -1.0, 0.0, 1.0, 5.0])
+        result = a.relu()
+        
+        # ReLU output should be >= 0
+        assert np.all(result.data >= 0.0)
+        
+        # Negative inputs should become 0
+        assert result.data[0] == 0.0
+        assert result.data[1] == 0.0
+        
+        # Positive inputs should remain unchanged
+        assert result.data[3] == 1.0
+        assert result.data[4] == 5.0
+        
+        # Zero should remain zero
+        assert result.data[2] == 0.0
+    
+    def test_relu_function_wrapper(self):
+        """Test relu function wrapper."""
+        a = Tensor([-2.0, -1.0, 0.0, 1.0, 2.0])
+        result = relu(a)
+        expected = np.maximum(0, a.data)
+        assert_tensor_close(result, expected)
 
 class TestUtilityFunctions:
     """Test utility functions."""

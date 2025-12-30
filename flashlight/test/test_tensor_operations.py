@@ -98,6 +98,25 @@ class TestTensorOperations:
         expected = np.tanh(a.data)
         assert_tensor_close(result, expected)
     
+    def test_relu(self):
+        """Test ReLU activation."""
+        a = Tensor([-2.0, -1.0, 0.0, 1.0, 2.0])
+        result = a.relu()
+        expected = np.maximum(0, a.data)
+        assert_tensor_close(result, expected)
+        
+        # Test with all negative values
+        a = Tensor([-5.0, -3.0, -1.0])
+        result = a.relu()
+        expected = np.array([0.0, 0.0, 0.0])
+        assert_tensor_close(result, expected)
+        
+        # Test with all positive values
+        a = Tensor([1.0, 2.0, 3.0])
+        result = a.relu()
+        expected = np.array([1.0, 2.0, 3.0])
+        assert_tensor_close(result, expected)
+    
     def test_exp(self):
         """Test exponential function."""
         a = Tensor([0.0, 1.0, 2.0])
